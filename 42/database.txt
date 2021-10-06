@@ -1,0 +1,72 @@
+create table phones (
+id serial, 
+user_id INT , 
+phone_number VARCHAR(10),
+primary key(id));
+
+create table rooms (
+id serial,
+phone_id INT, 
+room_number INT,
+primary key(id));
+
+insert into phones 
+(user_id, phone_number)
+values
+(1, 8067456780),
+(2, 8067565656),
+(3, 8067543578);
+insert into phones 
+(user_id)
+values
+(4)
+
+insert into rooms 
+(phone_id, room_number)
+values
+(1, 305),
+(2, 306),
+(3, 307),
+(4, 308);
+
+select * from phones where phone_number like '0%' order by phone_number;
+
+select * from phones where id = '2' or user_id = '1';
+
+create table users (
+id serial,
+surname VARCHAR(50),
+name VARCHAR(50),
+user_id INT,
+phone_id INT,
+primary key(id),
+foreign key(user_id) references phones(id),
+foreign key(phone_id) references rooms(id));
+
+insert into users 
+(surname, name, user_id, phone_id)
+values
+('Иванов', 'Иван', 1, 1),
+('Иванов', 'Егор', 2, 2),
+('Семенов', 'Семен', 3, 3),
+('Бронов', 'Генадий', 4, 4);
+
+select surname, count(*) from users group by surname having count(*) > 1;
+
+select users.surname, rooms.room_number
+from users inner join rooms
+on users.phone_id = rooms.phone_id
+and users.surname = 'Семенов';
+
+select users.surname, phones.phone_number
+from users left join phones
+on users.user_id = phones.user_id
+where phones.phone_number is null;
+
+select rooms.room_number, phones.phone_number
+from rooms right join phones
+on rooms.phone_id = phones.user_id
+where phones.phone_number is null;
+
+ALTER TABLE rooms
+ADD FOREIGN KEY (phone_id) REFERENCES phones(id);

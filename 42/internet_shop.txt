@@ -1,0 +1,53 @@
+create table catalogs (
+type_clothes VARCHAR(10),
+primary key(type_clothes));
+
+insert into catalogs 
+(type_clothes)
+values
+('Sweatshirt'),
+('TShirt'),
+('Trouser');
+
+create table products (
+product_id serial, 
+type_clothes VARCHAR(10),
+size VARCHAR(5),
+color VARCHAR(10),
+cost INT,
+primary key(product_id),
+foreign key(type_clothes) references catalogs(type_clothes));
+
+insert into products
+(type_clothes, size, color, cost)
+values
+('Sweatshirt', 'S', 'blue', 2650),
+('Sweatshirt', 'XS', 'red', 3200),
+('TShirt', 'S', 'red', 550),
+('TShirt', 'M', 'black', 300),
+('Trouser', 'XXS', 'blue', 700),
+('Trouser', 'L', 'red', 1000);
+
+create table users_shop (
+user_id serial, 
+login VARCHAR(10),
+pass VARCHAR(10),
+primary key(user_id));
+
+insert into users_shop
+(login, pass)
+values
+('user1', 123123);
+
+create table buskets (
+user_id INT,
+product_id INT,
+foreign key(user_id) references users_shop(user_id),
+foreign key(product_id) references products(product_id));
+
+insert into buskets
+(user_id, product_id)
+values
+(1, 1),
+(1, 3),
+(1, 5);
