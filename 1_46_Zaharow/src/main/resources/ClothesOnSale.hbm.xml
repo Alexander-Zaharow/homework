@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+    <class name="ClothesOnSale" table="clothesOnSale">
+        <meta attribute="class-description">
+            This class contains developer's details.
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="increment"/>
+        </id>
+
+        <property name="type" column="type" type="string"/>
+        <property name="size" column="size" type="string"/>
+        <property name="color" column="color" type="string"/>
+        <property name="cost" column="cost" type="int"/>
+    </class>
+
+</hibernate-mapping>

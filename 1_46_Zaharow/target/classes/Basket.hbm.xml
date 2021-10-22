@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+    <class name="Basket" table="basket">
+        <meta attribute="class-description">
+            This class contains developer's details.
+        </meta>
+        <id name="login" type="string" column="login">
+            <generator class="assigned"/>
+        </id>
+        <property name="clothe_id" column="clothe_id" type="int"/>
+    </class>
+
+</hibernate-mapping>
